@@ -19,11 +19,11 @@ def compute_optimal_tree_depth(model, Xtrain, Xtest, target="test", tree_depths=
     ALLOWED_TARGETS = ['train', 'test', 'both']
     if target not in ALLOWED_TARGETS:
         raise Exception("Target is not valid (allowed ones are " + \
-                        unicode(ALLOWED_TARGETS) + ": " + unicode(target))        
+                        str(ALLOWED_TARGETS) + ": " + str(target))        
             
     if tree_depths is None:
         max_depth = int(math.floor(math.log(len(Xtrain), 2)))
-        tree_depths = range(2, max_depth - 1)
+        tree_depths = list(range(2, max_depth - 1))
 
     kwargs = {'target':target, 'tree_depths':tree_depths, 'verbose':verbose}    
     return _conduct_tree_depths_comparison(model, Xtrain, Xtest, **kwargs)
@@ -45,7 +45,7 @@ def _conduct_tree_depths_comparison(model, Xtrain, Xtest, target="test", tree_de
             end = time.time()
 
             if model.verbose:
-                print("tree_depth %i -> %f" % (tree_depth, end - start))
+                print(("tree_depth %i -> %f" % (tree_depth, end - start)))
             runtimes[tree_depth] = end - start
                     
     elif target == "train":
@@ -59,7 +59,7 @@ def _conduct_tree_depths_comparison(model, Xtrain, Xtest, target="test", tree_de
             end = time.time()
             
             if model.verbose:
-                print("tree_depth %i -> %f" % (tree_depth, end - start))
+                print(("tree_depth %i -> %f" % (tree_depth, end - start)))
             runtimes[tree_depth] = end - start 
                             
     elif target == "both":
@@ -74,11 +74,11 @@ def _conduct_tree_depths_comparison(model, Xtrain, Xtest, target="test", tree_de
             end = time.time()
             
             if verbose > 0:
-                print("tree_depth %i -> %f" % (tree_depth, end - start))
+                print(("tree_depth %i -> %f" % (tree_depth, end - start)))
             runtimes[tree_depth] = end - start
 
     else:
 
-        raise Exception("Unknown target: " + unicode(target))
+        raise Exception("Unknown target: " + str(target))
 
     return min(runtimes, key=runtimes.get)

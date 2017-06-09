@@ -3,7 +3,7 @@
 # License: GPL v2
 #
 
-from __future__ import print_function
+
 
 import os
 import sys
@@ -11,7 +11,7 @@ import sys
 try:
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
+    import urllib.request, urllib.error, urllib.parse
 
 def download_from_url(url, fname):
     """ Downloads data from a given url.
@@ -36,7 +36,7 @@ def download_from_url(url, fname):
 
     # get data from url; based on 
     # http://stackoverflow.com/questions/22676/how-do-i-download-a-file-over-http-using-python
-    u = urllib2.urlopen(url)
+    u = urllib.request.urlopen(url)
     meta = u.info()
     fsize = int(meta.getheaders("Content-Length")[0])
     print("Downloading from %s (%i bytes) ... \n" % (url, fsize))

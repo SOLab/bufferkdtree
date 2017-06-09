@@ -18,7 +18,7 @@ from distutils.command.clean import clean
 # is installed (similar to scikit-learn
 # installation routine)
 if sys.version_info[0] < 3:
-    import __builtin__ as builtins
+    import builtins as builtins
 else:
     import builtins
 builtins.__BUFFERKDTREE_SETUP__ = True
@@ -154,7 +154,7 @@ def setup_package():
             metadata['configuration'] = configuration
             numpy_setup(**metadata)
         except Exception as e:
-            print("Could not install package: %s" % str(e))
+            print(("Could not install package: %s" % str(e)))
             sys.exit(0)
 
 if __name__ == "__main__":

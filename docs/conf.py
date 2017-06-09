@@ -60,9 +60,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'bufferkdtree'
-copyright = u'2013 - 2016, Fabian Gieseke'
-author = u'Fabian Gieseke'
+project = 'bufferkdtree'
+copyright = '2013 - 2016, Fabian Gieseke'
+author = 'Fabian Gieseke'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -238,8 +238,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'bufferkdtree.tex', u'bufferkdtree Documentation',
-   u'Fabian Gieseke', 'manual'),
+  (master_doc, 'bufferkdtree.tex', 'bufferkdtree Documentation',
+   'Fabian Gieseke', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -268,7 +268,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'bufferkdtree', u'bufferkdtree Documentation',
+    (master_doc, 'bufferkdtree', 'bufferkdtree Documentation',
      [author], 1)
 ]
 
@@ -282,7 +282,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'bufferkdtree', u'bufferkdtree Documentation',
+  (master_doc, 'bufferkdtree', 'bufferkdtree Documentation',
    author, 'bufferkdtree', 'One line description of project.',
    'Miscellaneous'),
 ]
@@ -379,6 +379,6 @@ subprocess.call("pwd")
 try:
     subprocess.call('cd doxygen; doxygen bufferkdtree; cd ..', shell=True)
 except Exception as e:
-    print("Could not build doxygen documentation: %s" % str(e))
+    print(("Could not build doxygen documentation: %s" % str(e)))
 
 

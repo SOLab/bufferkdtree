@@ -22,7 +22,7 @@ def ask_question(question):
     while True:
 
         sys.stdout.write(question + " ")
-        user_input = raw_input().lower()
+        user_input = input().lower()
         
         if user_input in yes_set:
             return True
@@ -32,4 +32,4 @@ def ask_question(question):
         
         else:
             
-            sys.stdout.write("Only the following answers are allowed: " + unicode(list(yes_set)) + " or " + unicode(list(no_set)) + "\n")
+            sys.stdout.write("Only the following answers are allowed: " + str(list(yes_set)) + " or " + str(list(no_set)) + "\n")

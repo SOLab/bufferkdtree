@@ -32,7 +32,7 @@ nbrs_buffer_kd_tree = NearestNeighbors(algorithm="buffer_kd_tree",
                         verbose=verbose)    
 nbrs_buffer_kd_tree.fit(X)
 dists, inds = nbrs_buffer_kd_tree.kneighbors(X, n_neighbors=n_neighbors)
-print("\nbuffer_kd_tree output\n" + str(dists[0]))
+print(("\nbuffer_kd_tree output\n" + str(dists[0])))
 
 # (2) apply brute-force implementation
 nbrs_brute = NearestNeighbors(algorithm="brute", 
@@ -40,7 +40,7 @@ nbrs_brute = NearestNeighbors(algorithm="brute",
                         verbose=verbose)    
 nbrs_brute.fit(X)
 dists, inds = nbrs_brute.kneighbors(X, n_neighbors=n_neighbors)
-print("\nbrute output\n" + str(dists[0]))
+print(("\nbrute output\n" + str(dists[0])))
 
 # (3) apply k-d tree mplementation
 nbrs_kd_tree = NearestNeighbors(algorithm="kd_tree", 
@@ -48,4 +48,4 @@ nbrs_kd_tree = NearestNeighbors(algorithm="kd_tree",
                         verbose=verbose)    
 nbrs_kd_tree.fit(X)
 dists, inds = nbrs_kd_tree.kneighbors(X, n_neighbors=n_neighbors)
-print("\nkd_tree output\n" + str(dists[0]) + "\n")
+print(("\nkd_tree output\n" + str(dists[0]) + "\n"))

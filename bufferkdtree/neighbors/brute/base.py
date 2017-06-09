@@ -101,7 +101,7 @@ class BruteNN(object):
         if self.verbose > 0:
             print("Freeing external resources ...")        
             
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             for device_id in self.plat_dev_ids[platform_id]:
                     
                 try:
@@ -110,7 +110,7 @@ class BruteNN(object):
                     self._get_wrapper_module().free_resources_extern(wrapper_record, wrapper_params)
                 except Exception as e:
                     if self.verbose > 0:
-                        print("Exception occured while freeing external resources: " + unicode(e))
+                        print(("Exception occured while freeing external resources: " + str(e)))
                       
     def get_params(self):
         """ Get parameters for this estimator.
@@ -180,7 +180,7 @@ class BruteNN(object):
         kernel_sources_dir = os.path.join(root_path, "../../src/neighbors/brute/kernels/opencl/")
                                 
         # initialize devices
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             self.wrapper_instances[platform_id] = {}
 
             for device_id in self.plat_dev_ids[platform_id]:
@@ -201,7 +201,7 @@ class BruteNN(object):
         threads = []
         
         # fit all models
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             for device_id in self.plat_dev_ids[platform_id]:
                 
                 wrapper_module = self._get_wrapper_module()
@@ -275,7 +275,7 @@ class BruteNN(object):
         n_chunk = int(math.ceil(len(X) / n_total_devices))
         
         if self.verbose > 0:
-            print("Splitting queries into %i chunks." % int(n_total_devices))
+            print(("Splitting queries into %i chunks." % int(n_total_devices)))
         
         d_mins = np.zeros((X.shape[0], n_neighbors), dtype=self.numpy_dtype_float)
         idx_mins = np.zeros((X.shape[0], n_neighbors), dtype=self.numpy_dtype_int)
@@ -286,7 +286,7 @@ class BruteNN(object):
         chunk_end = n_chunk
         
         while chunk_end < len(X) + n_chunk / 2:
-            for platform_id in self.plat_dev_ids.keys():
+            for platform_id in list(self.plat_dev_ids.keys()):
                 for device_id in self.plat_dev_ids[platform_id]:
                           
                     if chunk_start < len(X):
@@ -301,7 +301,7 @@ class BruteNN(object):
                         wrapper_record = self.wrapper_instances[platform_id][device_id]['record']
                         
                         if self.verbose > 0:
-                            print("Initializing device thread for range %i-%i ..." % (chunk_start, chunk_end_cropped))
+                            print(("Initializing device thread for range %i-%i ..." % (chunk_start, chunk_end_cropped)))
                         thread = DeviceQueryThread(wrapper_module, wrapper_params, wrapper_record, \
                                              X, d_mins, idx_mins, chunk_start, chunk_end_cropped, \
                                              verbose=self.verbose)
@@ -382,7 +382,7 @@ class BruteNN(object):
         """
         
         n_devices = 0
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             n_devices += len(self.plat_dev_ids[platform_id])
             
         return n_devices

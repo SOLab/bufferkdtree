@@ -28,13 +28,13 @@ def configuration(parent_package='', top_path=None):
             config.add_subpackage('neighbors/brute', subpackage_path='neighbors/brute')
             config.add_subpackage('neighbors/buffer_kdtree', subpackage_path='neighbors/buffer_kdtree')
     else:
-        print("\n\n--------------------------------------------------\n" + 
+        print(("\n\n--------------------------------------------------\n" + 
               "--------------------- WARNING --------------------\n" +
               "--------------------------------------------------\n" +  
               "Only compiling k-d tree implementation (CPU) since\n" + 
               "environment variable 'BUFFERKDTREE_KDTREE_ONLY' is\nset to " + 
               "'True' (or not set aat all)\n" + 
-              "--------------------------------------------------\n\n")
+              "--------------------------------------------------\n\n"))
     config.add_subpackage('tests')
     config.add_subpackage('util')
     

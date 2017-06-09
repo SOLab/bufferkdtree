@@ -3,7 +3,7 @@
 # License: GPL v2
 #
 
-from __future__ import division
+
 
 import os
 import math
@@ -71,7 +71,7 @@ class DeviceQueryThread(threading.Thread):
                     chunk_end_cropped = self.end_idx
                 
                 if self.verbose > 0:
-                    print("Processing query chunk %i -> %i" % (chunk_start, chunk_end_cropped))
+                    print(("Processing query chunk %i -> %i" % (chunk_start, chunk_end_cropped)))
 
                 self.wrapper_module.neighbors_extern(self.X[chunk_start:chunk_end_cropped], \
                                                      self.d_mins[chunk_start:chunk_end_cropped], \
@@ -152,7 +152,7 @@ class BufferKDTreeNN(object):
         try:
             if self.verbose > 0:
                 print("Freeing external resources ...")
-            for platform_id in self.plat_dev_ids.keys():
+            for platform_id in list(self.plat_dev_ids.keys()):
                 for device_id in self.plat_dev_ids[platform_id]:     
                     wrapper_tree_params = self.wrapper_instances[platform_id][device_id]['tree_params']
                     wrapper_tree_record = self.wrapper_instances[platform_id][device_id]['wrapper_tree_record']            
@@ -160,7 +160,7 @@ class BufferKDTreeNN(object):
                     
         except Exception as e:
             if self.verbose > 0:
-                print("Exception occured while freeing external resources: " + str(e))
+                print(("Exception occured while freeing external resources: " + str(e)))
 
     def get_params(self):
         """ Get parameters for this estimator.
@@ -219,7 +219,7 @@ class BufferKDTreeNN(object):
 
         final_tree_depth = self._compute_final_tree_depth(len(X), self.leaf_size, self.tree_depth)
         if self.verbose > 0:
-            print("Final tree depth: " + str(final_tree_depth))
+            print(("Final tree depth: " + str(final_tree_depth)))
         
         # make sure that the array is contiguous
         # (needed for the swig module)
@@ -267,7 +267,7 @@ class BufferKDTreeNN(object):
 
                     
        
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             self.wrapper_instances[platform_id] = {}
             for device_id in self.plat_dev_ids[platform_id]:
                 
@@ -295,7 +295,7 @@ class BufferKDTreeNN(object):
         
         threads = []
         
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             for device_id in self.plat_dev_ids[platform_id]:
                 
                 wrapper_module = self._get_wrapper_module()
@@ -402,7 +402,7 @@ class BufferKDTreeNN(object):
         chunk_end = n_chunk
         
         while chunk_end < len(X) + n_chunk / 2:
-            for platform_id in self.plat_dev_ids.keys():
+            for platform_id in list(self.plat_dev_ids.keys()):
                 for device_id in self.plat_dev_ids[platform_id]:
                           
                     if chunk_start < len(X):
@@ -417,7 +417,7 @@ class BufferKDTreeNN(object):
                         wrapper_tree_record = self.wrapper_instances[platform_id][device_id]['wrapper_tree_record']
                         
                         if self.verbose > 0:
-                            print("Initializing device thread for range %i-%i ..." % (chunk_start, chunk_end_cropped))
+                            print(("Initializing device thread for range %i-%i ..." % (chunk_start, chunk_end_cropped)))
                         thread = DeviceQueryThread(wrapper_module, wrapper_tree_params, wrapper_tree_record, \
                                              X, d_mins, idx_mins, chunk_start, chunk_end_cropped, verbose=self.verbose)
                         thread_list.append(thread)
@@ -462,7 +462,7 @@ class BufferKDTreeNN(object):
         """
         
         n_devices = 0
-        for platform_id in self.plat_dev_ids.keys():
+        for platform_id in list(self.plat_dev_ids.keys()):
             n_devices += len(self.plat_dev_ids[platform_id])
         return n_devices
     
@@ -527,7 +527,7 @@ class BufferKDTreeNN(object):
         """
         
         try:
-            for platform_id in self.plat_dev_ids.keys():
+            for platform_id in list(self.plat_dev_ids.keys()):
                 for device_id in self.plat_dev_ids[platform_id]:                    
                     if self.wrapper_instances[platform_id][device_id]['initialized'] == True:
                         wrapper_tree_params = self.wrapper_instances[platform_id][device_id]['tree_params']
